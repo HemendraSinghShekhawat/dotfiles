@@ -1,0 +1,299 @@
+gaps:
+  inner_gap: "1"
+  outer_gap: "0"
+
+general:
+  # Whether to show floating windows as always on top.
+  show_floating_on_top: false
+  focus_follows_cursor: false
+  floating_window_move_amount: "5%"
+
+bar:
+  height: "30px"
+  position: "top"
+  opacity: 1.0
+  background: "#20242cc4"
+  foreground: "#ffffff"
+  font_family: "Isovika"
+  font_size: "13px"
+  padding: "4px 6px"
+  offset_x: 0
+  offset_y: 0
+  border_radius: 0
+  # components_center:
+  # - type: "text"
+  #   text: ""
+  #   padding: "0 -2"
+  #   foreground: "#eba0ac"
+  #   background: "#ffffff00"
+  # - type: "workspaces"
+  #   displayed_workspace_background: "#ffffff00"
+  #   focused_workspace_background: "#eba0ac"
+  #   focused_workspace_foreground: "#11111b"
+  #   default_workspace_foreground: "#ffffff"
+  #   default_workspace_background: "#eba0ac"
+  #   padding: "0 0"
+  # - type: "text"
+  #   text: " "
+  #   foreground: "#eba0ac"
+  #   background: "#fab387"
+  #   padding: "0 -1"
+  # - type: "window title"
+  #   background: "#fab387"
+  #   foreground: "#2e3440"
+  # - type: "text"
+  #   text: "▶"
+  #   padding: "0 -4px"
+  #   foreground: "#fab387"
+  #   background: "#ffffff00"
+  # components_right:
+
+  components_left:
+    - type: "workspaces"
+      # focused_workspace_background: "#ffffff33"
+      # displayed_workspace_background: "#00000033"
+      # default_workspace_background: "transparent"
+      # foreground: "#2E3440"
+      # background: "#a6e3a1"
+      # background: "#cba6f7"
+      # foreground: "#2E3440"
+      displayed_workspace_background: "#ffffff00"
+      focused_workspace_background: "#a6e3a1"
+      focused_workspace_foreground: "#2E3440"
+      default_workspace_foreground: "#2E3440"
+      default_workspace_background: "#cba6f7"
+      # components_center:
+    - type: "window title"
+      background: "#cba6f7"
+      foreground: "#2E3440"
+      padding: "0px 10px"
+      # background: "#ffffff33"
+      border_radius: "3px"
+  components_right:
+    - type: "battery"
+      label_draining: " {battery_level}% remaining "
+      label_power_saver: " {battery_level}% (power saver) "
+      label_charging: " {battery_level}% (charging) "
+      margin: "0 0 0 10px"
+      foreground: "#2E3440"
+      background: "#a6e3a1"
+    - type: "text"
+      text: " "
+      # padding: "0 -2"
+      foreground: "#2E3440"
+      background: "#a6e3a1"
+    - type: "network"
+      foreground: "#2E3440"
+      background: "#a6e3a1"
+    - type: "tiling direction"
+      label_horizontal: " ⮂ "
+      label_vertical: " ⮁ "
+      padding: "0 8px"
+      # background: "#cba6f7"
+      # foreground: "#2E3440"
+      foreground: "#2E3440"
+      background: "#a6e3a1"
+    - type: "system tray"
+      label_collapse_text: " > "
+      label_expand_text: " < "
+      # background: "#a6e3a161"
+      background: "#cba6f7"
+      foreground: "#2E3440"
+    - type: "clock"
+      time_formatting: "hh:mm:ss  \ue0bb  MMM d"
+      padding: "0 10px"
+      foreground: "#2E3440"
+      background: "#a6e3a1"
+    - type: "weather"
+      latitude: 26.9124
+      longitude: 75.7873
+      label: " {temperature_celsius}°C "
+      label_sun: " ☀️ {temperature_celsius}°C "
+      label_moon: " 🌙 {temperature_celsius}°C "
+      label_cloud_moon: " 🌙☁️ {temperature_celsius}°C "
+      label_cloud_sun: " ⛅ {temperature_celsius}°C "
+      label_cloud_moon_rain: " 🌙🌧️ {temperature_celsius}°C "
+      label_cloud_sun_rain: " 🌦️ {temperature_celsius}°C "
+      label_cloud_rain: " 🌧️ {temperature_celsius}°C "
+      label_snow_flake: " ❄️ {temperature_celsius}°C "
+      label_thunderstorm: " ⚡ {temperature_celsius}°C "
+      label_cloud: " ☁️ {temperature_celsius}°C "
+      foreground: "#2E3440"
+      background: "#a6e3a1"
+
+workspaces:
+  - name: "1"
+  - name: "2"
+  - name: "3"
+  - name: "4"
+  - name: "5"
+  - name: "6"
+  - name: "7"
+  - name: "8"
+  - name: "9"
+
+window_rules:
+  # Task Manager requires admin privileges to manage and should be ignored unless running
+  # the WM as admin.
+  - command: "ignore"
+    match_process_name: "Taskmgr"
+
+  - command: "ignore"
+    match_process_name: "Teams"
+
+  # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
+  - command: "set floating"
+    match_class_name: "#32770"
+
+  # Some applications (eg. Steam) have borders that extend past the normal border size.
+  - command: "resize borders 0px -7px -7px -7px"
+    match_process_name: "steam"
+
+binding_modes:
+  - name: "resize"
+    keybindings:
+      # Resize focused window by a percentage or pixel amount.
+      - command: "resize width -2%"
+        bindings: ["H", "Left"]
+      - command: "resize width +2%"
+        bindings: ["L", "Right"]
+      - command: "resize height +2%"
+        bindings: ["K", "Up"]
+      - command: "resize height -2%"
+        bindings: ["J", "Down"]
+      # Press enter/escape to return to default keybindings.
+      - command: "binding mode none"
+        bindings: ["Escape", "Enter"]
+
+keybindings:
+  # Shift focus in a given direction.
+  - command: "focus left"
+    bindings: ["Alt+H", "RMenu+Control+H"]
+  - command: "focus right"
+    bindings: ["Alt+L", "RMenu+Control+L"]
+  - command: "focus up"
+    bindings: ["Alt+K", "RMenu+Control+K"]
+  - command: "focus down"
+    bindings:
+      ["Alt+J", "RMenu+Control+J"]
+      # Move focused window in a given direction.
+  - command: "move left"
+    bindings: ["Alt+Shift+H", "RMenu+Control+Shift+H"]
+  - command: "move right"
+    bindings: ["Alt+Shift+L", "RMenu+Control+Shift+L"]
+  - command: "move up"
+    bindings: ["Alt+Shift+K", "RMenu+Control+Shift+K"]
+  - command: "move down"
+    bindings: ["Alt+Shift+J", "RMenu+Control+Shift+J"]
+
+  # Resize focused window by a percentage or pixel amount.
+  - command: "resize width -2%"
+    binding: "Alt+U"
+  - command: "resize width +2%"
+    binding: "Alt+P"
+  - command: "resize height +2%"
+    binding: "Alt+O"
+  - command: "resize height -2%"
+    binding: "Alt+I"
+
+  # As an alternative to the resize keybindings above, resize mode enables resizing via
+  # HJKL or arrow keys. The binding mode is defined above with the name "resize".
+  - command: "binding mode resize"
+    binding: "Alt+R"
+
+  # Change tiling direction. This determines where new tiling windows will be inserted.
+  - command: "tiling direction toggle"
+    binding: "Alt+V"
+
+  # Change focus between floating / tiling windows.
+  - command: "focus mode toggle"
+    binding: "Alt+F"
+
+  # Change the focused window to be floating / tiling.
+  - command: "toggle floating"
+    binding: "Alt+Shift+F"
+
+  # Change the focused window to be maximized / unmaximized.
+  - command: "toggle maximized"
+    binding: "Alt+X"
+
+  # Minimize focused window.
+  - command: "set minimized"
+    binding: "Alt+M"
+
+  # Close focused window.
+  - command: "close"
+    binding: "Alt+Shift+Q"
+
+  # Kill GlazeWM process safely.
+  - command: "exit wm"
+    binding: "Alt+Shift+E"
+
+  # Re-evaluate configuration file.
+  - command: "reload config"
+    binding: "Alt+Shift+R"
+
+  # Launch CMD terminal (alternatively `exec wt` or `exec %ProgramFiles%/Git/git-bash.exe`
+  # to start Windows Terminal and Git Bash respectively.
+  - command: "exec cmhttps://utkarshpancholi@dev.azure.com/utkarshpancholi/pbi_vizio/_git/pbi_viziod"
+    binding: "Alt+Enter"
+
+  # Focus the workspace that last had focus.
+  - command: "focus workspace recent"
+    binding: "Alt+Y"
+
+  # Focus the next/previous workspace defined in `workspaces` config.
+  - command: "focus workspace next"
+    binding: "Alt+T"
+  - command: "focus workspace prev"
+    binding: "Alt+Shift+T"
+
+  # Change focus to a workspace defined in `workspaces` config.
+  - command: "focus workspace 1"
+    binding: "Alt+1"
+  - command: "focus workspace 2"
+    binding: "Alt+2"
+  - command: "focus workspace 3"
+    binding: "Alt+3"
+  - command: "focus workspace 4"
+    binding: "Alt+4"
+  - command: "focus workspace 5"
+    binding: "Alt+5"
+  - command: "focus workspace 6"
+    binding: "Alt+6"
+  - command: "focus workspace 7"
+    binding: "Alt+7"
+  - command: "focus workspace 8"
+    binding: "Alt+8"
+  - command: "focus workspace 9"
+    binding: "Alt+9"
+
+  # Move focused workspace to a monitor in a given direction.
+  - command: "move workspace left"
+    binding: "Alt+A"
+  - command: "move workspace right"
+    binding: "Alt+F"
+  - command: "move workspace up"
+    binding: "Alt+D"
+  - command: "move workspace down"
+    binding: "Alt+S"
+
+  # Move focused window to a workspace defined in `workspaces` config.
+  - commands: ["move to workspace 1", "focus workspace 1"]
+    binding: "Alt+Shift+1"
+  - commands: ["move to workspace 2", "focus workspace 2"]
+    binding: "Alt+Shift+2"
+  - commands: ["move to workspace 3", "focus workspace 3"]
+    binding: "Alt+Shift+3"
+  - commands: ["move to workspace 4", "focus workspace 4"]
+    binding: "Alt+Shift+4"
+  - commands: ["move to workspace 5", "focus workspace 5"]
+    binding: "Alt+Shift+5"
+  - commands: ["move to workspace 6", "focus workspace 6"]
+    binding: "Alt+Shift+6"
+  - commands: ["move to workspace 7", "focus workspace 7"]
+    binding: "Alt+Shift+7"
+  - commands: ["move to workspace 8", "focus workspace 8"]
+    binding: "Alt+Shift+8"
+  - commands: ["move to workspace 9", "focus workspace 9"]
+    binding: "Alt+Shift+9"
