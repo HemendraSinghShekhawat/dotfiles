@@ -7,6 +7,15 @@ general:
   show_floating_on_top: false
   focus_follows_cursor: false
   floating_window_move_amount: "5%"
+  border_width: "10"
+
+focus_borders:
+  active:
+    enabled: true
+    color: "#cba6f7"
+  inactive:
+    enabled: false
+    color: "#ff0000"
 
 bar:
   height: "30px"
@@ -17,9 +26,9 @@ bar:
   font_family: "Isovika"
   font_size: "13px"
   padding: "4px 6px"
-  offset_x: 0
-  offset_y: 0
-  border_radius: 0
+  offset_x: "0"
+  offset_y: "0"
+  border_radius: "0"
   # components_center:
   # - type: "text"
   #   text: ""
@@ -137,9 +146,14 @@ window_rules:
   # the WM as admin.
   - command: "ignore"
     match_process_name: "Taskmgr"
-
   - command: "ignore"
-    match_process_name: "Teams"
+    match_process_name: "msedgewebview2"
+  - command: "ignore"
+    match_process_name: "ms-teams"
+    # Do not manage Picture-in-picture windows
+  - command: "ignore"
+    match_title: "[Pp]icture.in.[Pp]icture"
+    match_class_name: "Chrome_WidgetWin_1|MozillaDialogClass"
 
   # Launches system dialogs as floating by default (eg. File Explorer save/open dialog).
   - command: "set floating"
@@ -203,15 +217,15 @@ keybindings:
 
   # Change tiling direction. This determines where new tiling windows will be inserted.
   - command: "tiling direction toggle"
-    binding: "Alt+V"
+    binding: "Alt+Shift+V"
 
   # Change focus between floating / tiling windows.
   - command: "focus mode toggle"
-    binding: "Alt+F"
+    binding: "Alt+Space"
 
   # Change the focused window to be floating / tiling.
   - command: "toggle floating"
-    binding: "Alt+Shift+F"
+    binding: "Alt+Shift+Space"
 
   # Change the focused window to be maximized / unmaximized.
   - command: "toggle maximized"
@@ -235,7 +249,7 @@ keybindings:
 
   # Launch CMD terminal (alternatively `exec wt` or `exec %ProgramFiles%/Git/git-bash.exe`
   # to start Windows Terminal and Git Bash respectively.
-  - command: "exec cmhttps://utkarshpancholi@dev.azure.com/utkarshpancholi/pbi_vizio/_git/pbi_viziod"
+  - command: "exec cmd"
     binding: "Alt+Enter"
 
   # Focus the workspace that last had focus.
@@ -296,4 +310,4 @@ keybindings:
   - commands: ["move to workspace 8", "focus workspace 8"]
     binding: "Alt+Shift+8"
   - commands: ["move to workspace 9", "focus workspace 9"]
-    binding: "Alt+Shift+9"
+    bindings: ["Alt+Shift+9"]

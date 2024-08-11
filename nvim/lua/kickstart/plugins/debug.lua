@@ -12,7 +12,7 @@ return {
   -- NOTE: And you can specify dependencies as well
   dependencies = {
     -- Creates a beautiful debugger UI
-    'rcarriga/nvim-dap-ui',
+    -- 'rcarriga/nvim-dap-ui',
 
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
@@ -20,10 +20,11 @@ return {
 
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
+    -- 'mxsdev/nvim-dap-vscode-js',
   },
   config = function()
     local dap = require 'dap'
-    local dapui = require 'dapui'
+    -- local dapui = require 'dapui'
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
@@ -54,34 +55,73 @@ return {
 
     -- Dap UI setup
     -- For more information, see |:help nvim-dap-ui|
-    dapui.setup {
-      -- Set icons to characters that are more likely to work in every terminal.
-      --    Feel free to remove or use ones that you like more! :)
-      --    Don't feel like these are good choices.
-      icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
-      controls = {
-        icons = {
-          pause = '⏸',
-          play = '▶',
-          step_into = '⏎',
-          step_over = '⏭',
-          step_out = '⏮',
-          step_back = 'b',
-          run_last = '▶▶',
-          terminate = '⏹',
-          disconnect = '⏏',
-        },
-      },
-    }
+    -- dapui.setup {
+    --   -- Set icons to characters that are more likely to work in every terminal.
+    --   --    Feel free to remove or use ones that you like more! :)
+    --   --    Don't feel like these are good choices.
+    --   icons = { expanded = '▾', collapsed = '▸', current_frame = '*' },
+    --   controls = {
+    --     icons = {
+    --       pause = '⏸',
+    --       play = '▶',
+    --       step_into = '⏎',
+    --       step_over = '⏭',
+    --       step_out = '⏮',
+    --       step_back = 'b',
+    --       run_last = '▶▶',
+    --       terminate = '⏹',
+    --       disconnect = '⏏',
+    --     },
+    --   },
+    -- }
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-    vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
-
-    dap.listeners.after.event_initialized['dapui_config'] = dapui.open
-    dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-    dap.listeners.before.event_exited['dapui_config'] = dapui.close
+    -- vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
+    --
+    -- dap.listeners.after.event_initialized['dapui_config'] = dapui.open
+    -- dap.listeners.before.event_terminated['dapui_config'] = dapui.close
+    -- dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
     -- Install golang specific config
     require('dap-go').setup()
+    -- -- Install javascript specific cofig
+    -- local js_based_languages = { 'typescript', 'javascript', 'typescriptreact' }
+    --
+    -- for _, language in ipairs(js_based_languages) do
+    --   require('dap').configurations[language] = {
+    --     {
+    --       type = 'pwa-node',
+    --       request = 'launch',
+    --       name = 'Launch file',
+    --       program = '${file}',
+    --       cwd = '${workspaceFolder}',
+    --     },
+    --     {
+    --       type = 'pwa-node',
+    --       request = 'attach',
+    --       name = 'Attach',
+    --       processId = require('dap.utils').pick_process,
+    --       cwd = '${workspaceFolder}',
+    --     },
+    --     {
+    --       type = 'pwa-chrome',
+    --       request = 'launch',
+    --       name = 'Start Chrome with "localhost"',
+    --       url = 'http://localhost:3000',
+    --       webRoot = '${workspaceFolder}',
+    --       userDataDir = '${workspaceFolder}/.vscode/vscode-chrome-debug-userdatadir',
+    --     },
+    --   }
+    -- end
+    -- require('dap-vscode-js').setup {
+    --   -- node_path = "node", -- Path of node executable. Defaults to $NODE_PATH, and then "node"
+    --   debugger_path = vim.fn.stdpath 'data' .. '/lazy/vscode-js-debug',
+    --   -- debugger_path = "(runtimedir)/site/pack/packer/opt/vscode-js-debug", -- Path to vscode-js-debug installation.
+    --   -- debugger_cmd = { "extension" }, -- Command to use to launch the debug server. Takes precedence over `node_path` and `debugger_path`.
+    --   adapters = { 'chrome', 'pwa-node', 'pwa-chrome', 'pwa-msedge', 'node-terminal', 'pwa-extensionHost', 'node', 'chrome' }, -- which adapters to register in nvim-dap
+    --   -- log_file_path = "(stdpath cache)/dap_vscode_js.log" -- Path for file logging
+    --   -- log_file_level = false -- Logging level for output to file. Set to false to disable file logging.
+    --   -- log_console_level = vim.log.levels.ERROR -- Logging level for output to console. Set to false to disable console output.
+    -- }
   end,
 }
